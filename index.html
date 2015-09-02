@@ -8,7 +8,7 @@
   });
   */
 
-  socket.emit('subscribe', {agent: 'SIP/6000'});
+  socket.emit('subscribe', {interface: 'SIP/6000'});
 
   var handler = function (data) {
   	console.log(data);
@@ -17,6 +17,6 @@
   socket.on('agentcalled', handler);
   socket.on('agentconnect', handler);
   socket.on('agentcomplete', handler);
-
+  socket.on('queuecallerabandon', handler);
 
 </script>
