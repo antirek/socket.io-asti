@@ -25,10 +25,7 @@ function handler (req, res) {
   });
 }
 
-
-
 io.on('connection', function (socket) {
-
   var client = new Client({socket: socket});
         
   client.on('subscribe', function (data) {

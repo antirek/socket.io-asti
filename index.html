@@ -9,8 +9,14 @@
   */
 
   socket.emit('subscribe', {agent: 'SIP/6000'});
-  socket.on('agentcalled', function (data) {
+
+  var handler = function (data) {
   	console.log(data);
-  });
+  };
+
+  socket.on('agentcalled', handler);
+  socket.on('agentconnect', handler);
+  socket.on('agentcomplete', handler);
+
 
 </script>
