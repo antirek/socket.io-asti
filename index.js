@@ -8,6 +8,7 @@ var Pool = require('./lib/pool');
 
 var pool = new Pool();
 
+var asterisk = new require('./lib/asterisk')(pool);
 
 app.listen(3111);
 
@@ -25,15 +26,12 @@ function handler (req, res) {
 }
 
 
-/*
+
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
 
-    var client = new Client({socket: socket});
-
-  });
+  var client = new Client({socket: socket});
+        
+  client.on('subscribe', function (data) {
+    pool.addClient(data.agent, client);
+  });  
 });
-
-*/

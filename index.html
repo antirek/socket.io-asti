@@ -1,8 +1,16 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost:3111');
+  /*
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
   });
+  */
+
+  socket.emit('subscribe', {agent: 'SIP/6000'});
+  socket.on('agentcalled', function (data) {
+  	console.log(data);
+  });
+
 </script>
