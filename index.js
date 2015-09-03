@@ -6,11 +6,12 @@ var fs = require('fs');
 var config = require('./config');
 var Client = require('./lib/client');
 var Pool = require('./lib/pool');
+var Asterisk = require('./lib/asterisk');
+
+
 
 var pool = new Pool();
-
-var asterisk = new require('./lib/asterisk')(pool, config.ami);
-
+var asterisk = new Asterisk(pool, config.ami);
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
@@ -27,7 +28,7 @@ function handler (req, res) {
 
 var app = http.createServer(handler);
 var io = socket_io(app);
-app.listen(3111);
+app.listen(config.port);
 
 io.on('connection', function (socket) {
   var client = new Client({socket: socket});

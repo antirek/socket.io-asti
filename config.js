@@ -4,5 +4,6 @@ module.exports = {
 		port: '5038',
 		username: 'admin',
 		password: 'superpassword'
-	}
+	},
+	port: 3111
 };
