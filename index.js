@@ -1,16 +1,16 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
+
+var socket_io = require('socket.io');
+var http = require('http');
 var fs = require('fs');
 
-
+var config = require('./config');
 var Client = require('./lib/client');
 var Pool = require('./lib/pool');
 
 var pool = new Pool();
 
-var asterisk = new require('./lib/asterisk')(pool);
+var asterisk = new require('./lib/asterisk')(pool, config.ami);
 
-app.listen(3111);
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
@@ -24,6 +24,10 @@ function handler (req, res) {
     res.end(data);
   });
 }
+
+var app = http.createServer(handler);
+var io = socket_io(app);
+app.listen(3111);
 
 io.on('connection', function (socket) {
   var client = new Client({socket: socket});
