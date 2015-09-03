@@ -30,5 +30,9 @@ io.on('connection', function (socket) {
         
   client.on('subscribe', function (data) {
     pool.addClient(data.interface, client);
-  });  
+  });
+
+  client.on('unsubscribe', function (data) {
+    pool.removeClient(client);
+  });
 });
